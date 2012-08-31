@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+	<meta charset=utf-8>
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="author" content="Krzysztof Wilczek" />
+	<link rel="shortcut icon" href="/public/img/favicon.png" />
+	<link rel="bookmark icon" href="/public/img/favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="flask, machines" />
+        <meta name="description" content="Example of Flask and JS app" />
+	<title>FlaskMachines</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+        <script type="text/javascript" href="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    </head>
+    <body>
+	
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="#">FlaskMachines</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    {% block content %}
+    
+    <div class="hero-unit">
+        <h1>Welcome on FlaskMachines</h1>
+        <p>Chose a one task and few machines to do the work.</p>
+  
+    </div>
+    {% endblock %}
+    </div>
+    <div class="navbar navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="#">Krzysztof Wilczek &copy;</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="http://www.facebook.com/pages/MoonCode/460086204003825">Facebook</a></li>
+                        <li><a href="https://plus.google.com/108420708629819962833" rel="publisher">Google +</a></li>
+                        <li><a href="https://twitter.com/#!/KrzysiekWilczek">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
