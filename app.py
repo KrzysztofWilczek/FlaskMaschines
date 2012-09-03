@@ -50,12 +50,20 @@ def add():
     g.db.execute('delete from task_maschines')
     g.db.commit()
     
-    task = request.form['task']
+    # Simple validation
+    if 'task' in request.form:
+        task = request.form['task']
+    else:
+        return jsonify(status=False,)    
+    maschines = request.form.getlist('maschines');
+    if (maschines.count == 0):
+        return jsonify(status=False,)
+        
     # Add task and machines to DB
-    for machine in request.form.getlist('maschines'):
+    for maschine in maschines:
         now = datetime.now()
         end_time = now+timedelta(seconds=random.randint(1, 60))
-        g.db.execute('insert into task_maschines (maschine_id, task_id, stage, end_time) values ('+machine+', '+task+', 1, \''+end_time.strftime('%Y-%m-%d %H:%M:%S')+'\')')
+        g.db.execute('insert into task_maschines (maschine_id, task_id, stage, end_time) values ('+maschine+', '+task+', 1, \''+end_time.strftime('%Y-%m-%d %H:%M:%S')+'\')')
         g.db.commit()
         
     tasks = g.db.execute('select * from task_machines')

@@ -97,6 +97,16 @@ TaskManager = function() {
     
     this.validateForm = function()
     {
+        if (!$('.maschine:checked').length)
+        {
+            $('#alert').modal();
+            return false;    
+        }
+        if (!$('.task:checked').length)
+        {
+            $('#alert').modal();
+            return false;    
+        }
         return true;
         
     }
