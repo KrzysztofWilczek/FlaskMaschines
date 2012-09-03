@@ -4,7 +4,7 @@ FlaskMaschines
 ### FlaskMaschines jest to przykładowa web aplikacja napisana w Pythonie z wykorzystaniem frameworka Flask.
 
 ### Instalacja
-Instalacje wykonujemy najlepiej z użyciem virutalenv. Plik requiments.txt definuje listę wymaganych pakietów dla instalatora pip (wymagana wersja Pythona 2.7.2).
+Instalacje wykonujemy najlepiej z użyciem virutalenv. Plik requirements.txt definuje listę wymaganych pakietów dla instalatora pip (wymagana wersja Pythona 2.7.2).
 Aplikacja wykorzystuje bazę danych SQLite. Należy upewnić się, czy plik database.db ma pełne uprawnienia dostępu (777).
 
 ### Użycie
