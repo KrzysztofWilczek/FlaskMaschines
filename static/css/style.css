@@ -1,3 +1,19 @@
 body {
     padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+#sendTask {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.stage_1 {
+    color: #f00;
+}
+.stage_2 {
+    color: #888;
+}
+.stage_3 {
+    color: #0f0;
 }

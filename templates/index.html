@@ -4,15 +4,17 @@
 	<meta charset=utf-8>
 	<meta name="robots" content="noindex, nofollow">
 	<meta name="author" content="Krzysztof Wilczek" />
-	<link rel="shortcut icon" href="/public/img/favicon.png" />
-	<link rel="bookmark icon" href="/public/img/favicon.png" />
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+	<link rel="bookmark icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="flask, machines" />
         <meta name="description" content="Przykład aplikacji Flask oraz JS" />
 	<title>FlaskMachines</title>
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
-        <script type="text/javascript" href="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
     </head>
     <body>
 	
@@ -32,31 +34,63 @@
     <div class="container">
     {% block content %}
     
-	<div class="hero-unit">
+	<div class="well">
 	    <h1>Witaj na FlaskMachines</h1>
 	    <p>Wybierz jedno z zdań oraz maszyny, które je wykonają.</p>
 	</div>
     
-    <form method="post" action="/add">
-	<div>
+    <form id="tasksForm" method="post" action="/add">
+	<div class="span2">
+	    <h3>Zadania:</h3>
 	{% for task in tasks %}
 	    <label class="radio">
-		<input value="{{task.id}}" name="task" type="radio"> {{ task.name }}
+		<input value="{{task.id}}" {% if lowerStage < 3 %} disabled="disabled"{%endif%} class="task" name="task" type="radio"> {{ task.name }}
 	    </label>
 	{% endfor %}
 	</div>
-	<div>
+	<div class="span2">
+	    <h3>Maszyny:</h3>
 	{% for maschine in maschines %}
 	    <label class="checkbox">
-		<input value="{{maschine.id}}" name="maschines" type="checkbox"> {{ maschine.name }}
+		<input value="{{maschine.id}}" {% if lowerStage < 3 %} disabled="disabled"{% endif %} class="maschine" name="maschines" type="checkbox"> {{ maschine.name }}
 	    </label>
 	{% endfor %}
-	    <input type="submit" value="Wykonaj" />
 	</div>
+	<input type="submit" {% if lowerStage < 3 %} disabled="disabled"{%endif%} class="btn btn-inverse pull-left" value="Wykonaj" id="sendTask"/>
+	<div style="clear: both;"></div>
     </form>
-    <div id="current_tasks_list">
-	No task to do
-    </div>
+    
+    <table class="table" id="current_tasks_list">
+	<col width="50px"/>
+	<col width="250px" />
+	<col width="250px" />
+	<col width="*" />
+	<thead>
+	    <tr>
+		<th>#</th>
+		<th>Zadanie</th>
+		<th>Maszyna</th>
+		<th>Status</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% if currentTasksCount == 0 %}
+		<tr>
+		    <td colspan="4">Brak zleconych zdań</td>
+		</tr>    
+	    {% else %}
+		{% for task in currentTasks %}
+		    <tr>
+			<td>{{ task.id }}</td>
+			<td>{{ task.task_name }}</td>
+			<td>{{ task.maschine_name }}</td>
+			<td class="stage_{{ task.stage }}">{{ task.stage_name }}</td>
+		    </tr>
+		{% endfor %}
+	    {% endif %}
+	    
+	</tbody>
+    </table>
     {% endblock %}
     </div>
     <div class="navbar navbar navbar-fixed-bottom">
