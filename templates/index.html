@@ -1,3 +1,4 @@
+{% from '_helpers.html' import menu with context %}
 <!DOCTYPE html>
 <html lang="en" >
     <head>
@@ -24,8 +25,8 @@
                 <a class="brand" href="#">FlaskMachines</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
+			{{ menu('index', 'Home') }}
+			{{ menu('about', 'Projekt') }}
                     </ul>
                 </div>
             </div>
