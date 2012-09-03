@@ -8,7 +8,7 @@
 	<link rel="bookmark icon" href="/public/img/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="flask, machines" />
-        <meta name="description" content="Example of Flask and JS app" />
+        <meta name="description" content="Przykład aplikacji Flask oraz JS" />
 	<title>FlaskMachines</title>
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
@@ -32,10 +32,30 @@
     <div class="container">
     {% block content %}
     
-    <div class="hero-unit">
-        <h1>Welcome on FlaskMachines</h1>
-        <p>Chose a one task and few machines to do the work.</p>
-  
+	<div class="hero-unit">
+	    <h1>Witaj na FlaskMachines</h1>
+	    <p>Wybierz jedno z zdań oraz maszyny, które je wykonają.</p>
+	</div>
+    
+    <form method="post" action="/add">
+	<div>
+	{% for task in tasks %}
+	    <label class="radio">
+		<input value="{{task.id}}" name="task" type="radio"> {{ task.name }}
+	    </label>
+	{% endfor %}
+	</div>
+	<div>
+	{% for maschine in maschines %}
+	    <label class="checkbox">
+		<input value="{{maschine.id}}" name="maschines" type="checkbox"> {{ maschine.name }}
+	    </label>
+	{% endfor %}
+	    <input type="submit" value="Wykonaj" />
+	</div>
+    </form>
+    <div id="current_tasks_list">
+	No task to do
     </div>
     {% endblock %}
     </div>
